@@ -1,0 +1,8 @@
+{
+    "name": "jenstornell/superplugin",
+    "description": "Components for Kirby CMS",
+    "version": "0.1",
+    "autoload": {
+        "files": ["config.php"]
+    }
+  }
