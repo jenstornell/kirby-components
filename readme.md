@@ -18,7 +18,7 @@ For example, you can do something like `snippet('footer')` when having the folde
 
 Place files in template or snippet components.
 
-```php
+```text
 site/components/
   --about/
     blueprint.yml
@@ -36,7 +36,7 @@ site/components/
 
 - `--` prefixed folders are template components.
 - Non prefixed folders are snippet components.
-- You can place snippet components inside template components like `--my-template/my-snippet/`
+- You can place snippet components inside template components like `snippet(--my-template/my-snippet)`
 
 ### Files
 
