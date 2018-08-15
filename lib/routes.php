@@ -43,7 +43,7 @@ if(c::get('plugin.components.assets.path', 'kirby-components/assets')) {
     ]);
 }
 
-kirby()->set('route', [
+/*kirby()->set('route', [
     'pattern' => 'c/(:all)',
     'method'  => 'GET',
     'action'  => function($component) {
@@ -118,6 +118,7 @@ class SnippetPreview extends \Kirby\Component\Template {
         return $result;
     }
 }
+*/
 
 class Assets {
     function whitelist() {

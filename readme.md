@@ -60,7 +60,7 @@ These files are allowed in a template component.
 
 ```php
 return [
-  'jenstornell.components.roots' => $mixed
+  'jenstornell.components.roots' => $roots
 ];
 ```
 

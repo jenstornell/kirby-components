@@ -3,7 +3,7 @@ namespace JensTornell\Components;
 
 class Core {
   // The root(s) of the component folder(s)
-  private $roots;
+  public $roots;
 
   // Class instances
   private $Helpers;
@@ -75,9 +75,38 @@ class Core {
       }
 
       // Generate array for the plugin ring
-      $data[$registry . 's'][$id] = $path;
+      if($registry == 'controller') {
+        $controller = require_once $path;
+        $data[$registry . 's'][$id] = $controller;
+      } else {
+        $data[$registry . 's'][$id] = $path;
+      }
     }
 
+    $data['routes'] = $this->assetsRoute();
+
     return $data;
+  }
+
+  // Route for css, gif, js, jpg, png, svg, webp
+  function assetsRoute() {
+    return [
+      [
+        'pattern' => 'components/assets/(:all)/(:any).(css|gif|js|jpg|png|svg|webp)',
+        'action'  => function($id, $filename, $extension) {
+          $site = site();
+          $roots = $this->Helpers->rootsToArray($this->roots);
+    
+          foreach($roots as $root) {
+            $filepath = "$root/$id/$filename.$extension";
+            if(!file_exists($filepath)) continue;
+    
+            return new Response(file_get_contents($filepath), $extension);
+          }
+    
+          return false;
+        }
+      ]
+    ];
   }
 }
