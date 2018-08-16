@@ -2,7 +2,7 @@
 
 Built your site with files bundled as components.
 
-- **Version:** 0.1 beta
+- **Version:** 0.1 alpha
 - **Requirement:** Kirby 3
 - [Changelog](docs/changelog.md)
 - [Disclaimer](https://devonera.se/docs/disclaimer/?user=jenstornell&plugin=kirby-components)
