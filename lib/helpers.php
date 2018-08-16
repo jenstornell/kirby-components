@@ -27,16 +27,11 @@ class Helpers {
   // ID including --
   function rawId($root, $path) {
     $root = realpath($root);
-    $parts = pathinfo($path);
-    $name = strtr($parts['dirname'], [
-        $root => '',
-    ]);
-    
-    if($name == $parts['dirname']) return;
+    $name = pathinfo($path)['dirname'];
 
-    $name = strtr($name, [
-        "\\" => '/',
-    ]);
+    $name = str_replace("\\", '/', $name);
+    $root = str_replace("\\", '/', $root);
+    $name = str_replace($root, '', $name);
 
     $name = trim($name, '/');
 

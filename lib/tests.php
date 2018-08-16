@@ -12,12 +12,12 @@ $path_template_snippet = "D:\projects\plugins\kirby-components/site/components\-
 $roots = $Helpers->rootsToArray($root_path1);
 $roots2 = $Helpers->rootsToArray($root_path2);
 
-$iterator = $Helpers->toIterator($roots);
+$iterator = $Helpers->toIterator($root_path1);
 
 // rawId
-$rawId_template = $Helpers->rawId($roots, $path_template);
-$rawId_template_snippet = $Helpers->rawId($roots, $path_template_snippet);
-$rawId_snippet = $Helpers->rawId($roots, $path_snippet);
+$rawId_template = $Helpers->rawId($root_path1, $path_template);
+$rawId_template_snippet = $Helpers->rawId($root_path1, $path_template_snippet);
+$rawId_snippet = $Helpers->rawId($root_path1, $path_snippet);
 
 // Type
 $type_template = $Helpers->type($rawId_template);
