@@ -17,13 +17,16 @@ Place files in template or snippet components.
 ```text
 site/components/
   --about/
+    blueprint.yml
     component.php
+    controller.php
   --home/
   --projects/
     menu1/
     menu2/
   header/
   footer/
+    autoload.php
     component.php
     image.jpg
     style.scss
