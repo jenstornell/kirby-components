@@ -60,4 +60,4 @@ return [
 
 ### roots
 
-You can send a path to your components, or an array with multiple paths. By default it will use `../site/components`.
+You can send a path to your components, or an array with multiple paths. By default it will use `__DIR__ . '../site/components'`.
