@@ -17,7 +17,6 @@ Place files in template or snippet components.
 ```text
 site/components/
   --about/
-    blueprint.yml
     component.php
   --home/
   --projects/
@@ -43,7 +42,6 @@ The supported files will be used by the plugin. Additionally you can add your ow
 These files are allowed in a template component.
 
 - `autoload.php` - Will be loaded instantly when found.
-- `blueprint.yml` - Blueprint file. Only the `yml` extension is supported.
 - `component.php` - The template file.
 - `controller.php` - The template controller file.
 
