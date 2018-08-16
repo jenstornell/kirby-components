@@ -1,6 +1,6 @@
 # Kirby Components
 
-Build your site with components. A low level plugin completely without UI.
+Built your site with files bundled as components.
 
 - **Version:** 0.1 beta
 - **Requirement:** Kirby 3
@@ -9,10 +9,6 @@ Build your site with components. A low level plugin completely without UI.
 - [Donate](https://devonera.se/docs/donate/?user=jenstornell&plugin=kirby-components)
 
 ## How it works
-
-Templates, controllers, blueprints and snippets are automatically registered when the components for them are created.
-
-For example, you can do something like `snippet('footer')` when having the folder setup below.
 
 ### Folders
 

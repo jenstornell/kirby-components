@@ -1,5 +1,7 @@
 <?php
 namespace JensTornell\Components;
+use RecursiveIteratorIterator;
+use RecursiveDirectoryIterator;
 
 class Helpers {
 
@@ -23,36 +25,34 @@ class Helpers {
   }
 
   // ID including --
-  function rawId($roots, $path) {
-    foreach($roots as $root) {
-        $parts = pathinfo($path);
-        $name = strtr($parts['dirname'], [
-            $root => '',
-        ]);
-        if($name == $parts['dirname']) continue;
+  function rawId($root, $path) {
+    $root = realpath($root);
+    $parts = pathinfo($path);
+    $name = strtr($parts['dirname'], [
+        $root => '',
+    ]);
+    
+    if($name == $parts['dirname']) return;
 
-        $name = strtr($name, [
-            "\\" => '/',
-        ]);
-        $name = trim($name, '/');
-        return $name;
-    }
+    $name = strtr($name, [
+        "\\" => '/',
+    ]);
+
+    $name = trim($name, '/');
+
+    return $name;
   }
 
-  // Loop all roots and return iterator
-  function toIterator($roots) {
+  // Loop root and return iterator
+  function toIterator($root) {
+    $root = realpath($root);
     $iterator = new \AppendIterator();
 
-    foreach($roots as $root) {
+    if(!file_exists($root))
+      die('The components folder could not be found');
 
-      if(!file_exists($root))
-        die('The components folder could not be found');
-
-      $directoryIterator = new \RecursiveDirectoryIterator($root);
-      $directoryIterator->setFlags(\RecursiveDirectoryIterator::SKIP_DOTS);
-      $iterator->append(new \RecursiveIteratorIterator($directoryIterator));
-    }
-    $iterator->setFlags(\RecursiveDirectoryIterator::SKIP_DOTS);
+    $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root));
+    //$directoryIterator->setFlags(\RecursiveDirectoryIterator::SKIP_DOTS);
 
     return $iterator;
   }

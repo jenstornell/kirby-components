@@ -35,56 +35,57 @@ class Core {
 
   // Generate array for the plugin ring
   function toRing($roots) {
-    $iterator = $this->Helpers->toIterator($roots);
 
-    foreach($iterator as $path) {
-      if($path->isDir()) continue;
+    foreach($roots as $root) {
+      $iterator = $this->Helpers->toIterator($root);
 
-      // Path as string
-      $path = strval($path);
+      foreach($iterator as $path) {
+        if($path->isDir()) continue;
 
-      // Filename with extension
-      $filename = basename($path);
+        // Path as string
+        $path = strval($path);
 
-      // Raw name
-      $raw_id = $this->Helpers->rawId($roots, $path);
+        // Filename with extension
+        $filename = basename($path);
 
-      // Stem - Filename without extension
-      $stem = pathinfo($filename)['filename'];
+        // Raw name
+        $raw_id = $this->Helpers->rawId($root, $path);
 
-      // Type - Template or snippet
-      $type = $this->Helpers->type($raw_id);
+        // Stem - Filename without extension
+        $stem = pathinfo($filename)['filename'];
 
-      // Name without --
-      $id = $this->Helpers->id($raw_id, $type);
-      if(empty($id)) continue;
+        // Type - Template or snippet
+        $type = $this->Helpers->type($raw_id);
 
-      // Allowed - Is filename allowed
-      if(!in_array($filename, $this->whitelist[$type])) continue;
+        // Name without --
+        $id = $this->Helpers->id($raw_id, $type);
+        if(empty($id)) continue;
 
-      // Registry - If component, return template or snippet, else the stem
-      if($stem == 'component')
-        $registry = $type;
-      else
-        $registry = $stem;
+        // Allowed - Is filename allowed
+        if(!in_array($filename, $this->whitelist[$type])) continue;
 
-      // Load autoloaded files
-      if($registry == 'autoload') {
-        require_once $path;
-        continue;
-      }
+        // Registry - If component, return template or snippet, else the stem
+        if($stem == 'component')
+          $registry = $type;
+        else
+          $registry = $stem;
 
-      // Generate array for the plugin ring
-      if($registry == 'controller') {
-        $controller = require_once $path;
-        $data[$registry . 's'][$id] = $controller;
-      } else {
-        $data[$registry . 's'][$id] = $path;
+        // Load autoloaded files
+        if($registry == 'autoload') {
+          require_once $path;
+          continue;
+        }
+
+        // Generate array for the plugin ring
+        if($registry == 'controller') {
+          $controller = require_once $path;
+          $data[$registry . 's'][$id] = $controller;
+        } else {
+          $data[$registry . 's'][$id] = $path;
+        }
       }
     }
-
     $data['routes'] = $this->assetsRoute();
-
     return $data;
   }
 
